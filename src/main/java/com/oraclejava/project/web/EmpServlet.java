@@ -31,6 +31,16 @@ public class EmpServlet extends HttpServlet {
 		} 
 	}
 	
+	private void closeConnection(Connection con) {
+		//4.언제나 커넥션을 종료한다.
+		try {
+			con.close();
+			System.out.println("커넥션 종료!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public void init() throws ServletException {
 		//1. jdbc 드라이버 로드
@@ -49,6 +59,7 @@ public class EmpServlet extends HttpServlet {
 //	}	
 		//2. jdbc커넥션을 맺는다.
 		Connection con = getConnection();
+		System.out.println("커넥션 성공");
 		
 //		
 //		try {
@@ -92,13 +103,14 @@ public class EmpServlet extends HttpServlet {
 			throw new ServletException("쿼리 실행 오류!", e);
 			
 		} finally {
-			//4.언제나 커넥션을 종료한다.
-			try {
-				con.close();
-				System.out.println("커넥션 종료!");
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+//			//4.언제나 커넥션을 종료한다.
+//			try {
+//				con.close();
+//				System.out.println("커넥션 종료!");
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+			closeConnection(con);
 		}
 		
 		

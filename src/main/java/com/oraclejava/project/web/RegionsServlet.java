@@ -30,7 +30,15 @@ public class RegionsServlet extends HelloServlet{
 		}
 	}
 	
-	
+	private void closeConnection(Connection con) {
+		//4.언제나 커넥션을 종료한다.
+		try {
+			con.close();
+			System.out.println("커넥션 종료!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	@Override
 	public void init() throws ServletException {
@@ -50,6 +58,7 @@ public class RegionsServlet extends HelloServlet{
 //		}
 //		
 		Connection con = getConnection();
+		System.out.println("커넥션 성공");
 		
 //		try {
 //			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe" , "hr", "hr");
@@ -61,6 +70,9 @@ public class RegionsServlet extends HelloServlet{
 		resp.setContentType("text/html; charset=utf-8");
 		PrintWriter out = resp.getWriter();
 		out.println("<html>");
+		out.println("<head>");
+		out.println("<link rel='stylesheet' href='html/style.css'>");
+		out.println("</head>");
 		out.println("<body>");
 		out.println("<h1> RegionsServlet 입니다. </h1>");
 		
@@ -68,15 +80,16 @@ public class RegionsServlet extends HelloServlet{
 				try {
 					Statement stmt = con.createStatement();
 					ResultSet rs = stmt.executeQuery("SELECT region_id,region_name from regions");
-					out.println("<table border=1 cellpadding=0 cellspacing=0 width=300>");
+					//out.println("<table border=1 cellpadding=0 cellspacing=0 width=300>");
+					out.println("<table>");
 					out.println("<tr>");
-					
 					out.println("<th>지역 id</th>");
 					out.println("<th>지역명</th>");
 					out.println("</tr>");
+					//out.println("<tr><td>지역 id</td><td>지역명</td></tr>");
 					while (rs.next()) {
 						out.println("<tr>");
-						String region_id = rs.getString("region_id");
+						int region_id = rs.getInt("region_id");
 						String region_name = rs.getString("region_name");
 						out.println("<td>" + region_id  + "</td>");
 						out.println("<td>" + region_name  + "</td>");
@@ -92,13 +105,7 @@ public class RegionsServlet extends HelloServlet{
 					throw new ServletException("쿼리 실행 오류", e);
 				
 				} finally {
-					//4.언제나 커넥션을 종료한다.
-					try {
-						con.close();
-						System.out.println("커넥션 종료!");
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
+					closeConnection(con);
 				}
 				
 				

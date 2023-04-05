@@ -43,10 +43,7 @@ a:active {
 	color: yellow;
 }
 
-table{
- border-collapse:collapse;
- 
-}
+
 
 /* tbody > tr:nth-child(2n +1 ){ */
 /* 	background-color: #9999ff; */
@@ -91,7 +88,9 @@ p:first-letter {
 }
 
 
-
+table, th, td {
+	border: 1px solid;
+}
 
 
 
