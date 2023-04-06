@@ -30,7 +30,7 @@ public class MovieServlet extends HttpServlet {
 		try {
 			return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr","hr");
 		} catch (SQLException e) {
-			throw new ServletException("立加坷幅惯积",e);
+			throw new ServletException("立加坷幅惯积",e); 
 		}
 	}
 	
