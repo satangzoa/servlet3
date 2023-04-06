@@ -97,8 +97,14 @@ table {
 	width: 100%;
 }
 
+.movielist {
+	color: green;
+}
 
 
+.movie {
+	color: red;
+}
 
 
 

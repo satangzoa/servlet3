@@ -19,7 +19,14 @@
 	    <version>21.9.0.0</version>
 	</dependency>
 	
-	</dependencies>
+	  <dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>jstl</artifactId>
+	    <version>1.2</version>
+	  </dependency>
+  
+  </dependencies>
+  
 	<build>
 		<plugins>
 			<plugin>
@@ -38,6 +45,6 @@
 			</plugin>
 		</plugins>
 	</build>
-  
+
   
 </project>
